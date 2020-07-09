@@ -7,7 +7,7 @@ class unmuteCommand(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def unmute(self, ctx, member: discord.Member = None, *):
+    async def unmute(self, ctx, member: discord.Member = None):
         mute_role = discord.utils.get(ctx.guild.roles, 'Mute')
         if ctx.message.author.guild_permissions.manage_messages:
             if not member:
@@ -29,3 +29,6 @@ class unmuteCommand(commands.Cog):
             no_permission.add_field(name='Keine Rechte', value='```manage messages```')
             no_permission.set_footer(text=f'{ctx.author}', icon_url=f'{ctx.author.avatar_url_as(size=512)}')
             await ctx.send(embed=no_permission)
+
+def setup(client):
+    client.add_cog(unmuteCommand(client))
