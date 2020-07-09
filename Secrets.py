@@ -1,2 +1,2 @@
-BOT_TOKEN = 'NzE2MzcxMTQ2MDIyMzIyMjI2.XuJsng.k4hocrlnGvdg2b5UXBzWZXfet2U'
+BOT_TOKEN = ''
 BOT_VERSION = '1.2 Beta'
