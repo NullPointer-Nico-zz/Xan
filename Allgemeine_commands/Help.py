@@ -53,6 +53,8 @@ class HelpCommand(commands.Cog):
         help_commands_all.add_field(name='**Ban**', value='_usage: ban <member> [grund]_', inline=False)
         help_commands_all.add_field(name='**Kick**', value='_usage: kick <member> [grund]_', inline=False)
         help_commands_all.add_field(name='**Unban**', value='_usage: unban <member>_', inline=False)
+        help_commands_all.add_field(name='**Mute**', value='_usage: mute <member> [grund]_', inline=False)
+        help_commands_all.add_field(name='**Unmute**', value='_usage: unmute <member>_', inline=False)
         help_commands_all.add_field(name='**Broadcast**', value='_usage: br <text>_', inline=False)
         help_commands_all.add_field(name='**Clear**', value='_usage: clear <zahl>_', inline=False)
         help_commands_all.add_field(name='**Nickname**', value='_usage: nick <member> <nickname>_', inline=False)
@@ -88,6 +90,8 @@ class HelpCommand(commands.Cog):
         help_command_mod.add_field(name='**Ban**', value='_usage: ban <member> [Grund]_', inline=False)
         help_command_mod.add_field(name='**Kick**', value='_usage: kick <member> [Grund]_', inline=False)
         help_command_mod.add_field(name='**Unban**', value='_usage: unban <member>_', inline=False)
+        help_command_mod.add_field(name='**Mute**', value='_usage: mute <member> [grund]_', inline=False)
+        help_command_mod.add_field(name='**Unmute**', value='_usage: unmute <member>_', inline=False)
         help_command_mod.set_footer(text='<> = Nötig | [] = Nicht Nötig')
 
         await ctx.message.delete()

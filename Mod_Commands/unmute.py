@@ -8,7 +8,7 @@ class unmuteCommand(commands.Cog):
 
     @commands.command()
     async def unmute(self, ctx, member: discord.Member = None):
-        mute_role = discord.utils.get(ctx.guild.roles, 'Mute')
+        mute_role = discord.utils.get(ctx.guild.roles, name='Mute')
         if ctx.message.author.guild_permissions.manage_messages:
             if not member:
                 await ctx.message.delete()
