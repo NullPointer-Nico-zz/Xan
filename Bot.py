@@ -8,17 +8,20 @@ from discord.ext import commands
 from Secrets import BOT_TOKEN
 from Secrets import BOT_VERSION
 
+
 def prefix(client, message):
     with open('prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     return prefixes[str(message.guild.id)]
 
+
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 client.remove_command('help')
 
 s = set([])
 members = set([])
+
 
 @client.event
 async def on_ready():
@@ -28,7 +31,8 @@ async def on_ready():
     print('<====Xan====>')
     await Activity_Task()
 
-start_time = d.datetime.utcnow() 
+start_time = d.datetime.utcnow()
+
 
 async def Activity_Task():
     while True:
@@ -42,12 +46,11 @@ async def Activity_Task():
         for guild in client.guilds:
             for member in guild.members:
                 members.add(member)
-        
+
         await asyncio.sleep(2)
         await client.change_presence(activity=discord.Streaming(name=f'Mit {str(len(members))} Usern!', url='https://www.twitch.tv/#'))
         await asyncio.sleep(60)
 
-        
 
 for admin in os.listdir('./Admin_Commands'):
     if admin.endswith('.py'):

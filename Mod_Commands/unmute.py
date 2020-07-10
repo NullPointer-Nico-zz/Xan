@@ -2,6 +2,7 @@ import discord
 
 from discord.ext import commands
 
+
 class unmuteCommand(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -14,7 +15,7 @@ class unmuteCommand(commands.Cog):
                 await ctx.message.delete()
                 await ctx.send('**Bitte geb ein User an den du entmuten willst!**')
                 return
-            
+
             if mute_role in member.roles:
                 await ctx.message.delete()
                 await member.remove_roles(mute_role)
@@ -25,10 +26,17 @@ class unmuteCommand(commands.Cog):
 
         else:
             await ctx.message.delete()
-            no_permission = discord.Embed(title='No Permission', color=discord.Color.dark_red())
-            no_permission.add_field(name='Keine Rechte', value='```manage messages```')
-            no_permission.set_footer(text=f'{ctx.author}', icon_url=f'{ctx.author.avatar_url_as(size=512)}')
+            no_permission = discord.Embed(
+                title='No Permission',
+                color=discord.Color.dark_red())
+            no_permission.add_field(
+                name='Keine Rechte',
+                value='```manage messages```')
+            no_permission.set_footer(
+                text=f'{ctx.author}',
+                icon_url=f'{ctx.author.avatar_url_as(size=512)}')
             await ctx.send(embed=no_permission)
+
 
 def setup(client):
     client.add_cog(unmuteCommand(client))
