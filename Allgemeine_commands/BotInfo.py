@@ -28,25 +28,37 @@ class BotInfoCommand(commands.Cog):
             time_format = 'Tage: **{d}**\nStunden: **{h}**\nMinuten: **{m}**\nSekunden: **{s}**'
         else:
             time_format = 'Stunden: **{h}**\nMinuten: **{m}**\nSekunden: **{s}**'
-        uptime_stamp = time_format.format(d=days, h=hours, m=minutes, s=seconds)
+        uptime_stamp = time_format.format(
+            d=days, h=hours, m=minutes, s=seconds)
 
         await ctx.message.delete()
         bot_info = discord.Embed(title='**Bot Info**', description='Infos über den Bot',
                                  color=discord.Color.dark_gold())
-        bot_info.add_field(name='**Name**', value=f'{self.client.user.name}', inline=True)
-        bot_info.add_field(name='**Bot Version**', value=BOT_VERSION, inline=True)
-        bot_info.add_field(name='**Erstellungs Datum**', value=f'{self.client.user.created_at}', inline=True)
-        bot_info.add_field(name='**API**', value='Discord.py\nhttps://discordpy.readthedocs.io/en/latest/', inline=True)
-        bot_info.add_field(name='**API Version**', value=f'{discord.__version__}', inline=True)
-        bot_info.add_field(name='**OS/Plattform**', value=f'{platform.system()}', inline=True)
+        bot_info.add_field(
+            name='**Name**', value=f'{self.client.user.name}', inline=True)
+        bot_info.add_field(name='**Bot Version**',
+                           value=BOT_VERSION, inline=True)
+        bot_info.add_field(name='**Erstellungs Datum**',
+                           value=f'{self.client.user.created_at}', inline=True)
+        bot_info.add_field(
+            name='**API**', value='Discord.py\nhttps://discordpy.readthedocs.io/en/latest/', inline=True)
+        bot_info.add_field(name='**API Version**',
+                           value=f'{discord.__version__}', inline=True)
+        bot_info.add_field(name='**OS/Plattform**',
+                           value=f'{platform.system()}', inline=True)
         bot_info.add_field(name='**Invite**',
                            value='https://discord.com/api/oauth2/authorize?client_id=716371146022322226&permissions=8&scope=bot',
                            inline=True)
-        bot_info.add_field(name='**Uptime seit Restart**', value=f'{uptime_stamp}', inline=True)
-        bot_info.add_field(name='**Bot owner**', value=f'Zockyyyy || Nico#7468\nhttps://dsc.bio/zockyyyy', inline=True)
-        bot_info.add_field(name='**RAM Usage in %**', value=f'{str(ram[2])}%', inline=True)
-        bot_info.add_field(name='**CPU Usage in %**', value=f'{str(cpu)}%', inline=True)
-        bot_info.set_footer(text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
+        bot_info.add_field(name='**Uptime seit Restart**',
+                           value=f'{uptime_stamp}', inline=True)
+        bot_info.add_field(
+            name='**Bot owner**', value=f'Zockyyyy || Nico#7468\nhttps://dsc.bio/zockyyyy', inline=True)
+        bot_info.add_field(name='**RAM Usage in %**',
+                           value=f'{str(ram[2])}%', inline=True)
+        bot_info.add_field(name='**CPU Usage in %**',
+                           value=f'{str(cpu)}%', inline=True)
+        bot_info.set_footer(
+            text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
         await ctx.send(embed=bot_info)
 
 

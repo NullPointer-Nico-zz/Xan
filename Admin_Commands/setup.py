@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+
 class setupCommand(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -10,10 +11,14 @@ class setupCommand(commands.Cog):
         if ctx.message.author.guild_permissions.administrator:
             if not args:
                 await ctx.message.delete()
-                setup_help = discord.Embed(title='**Setup Help**', description='Setup Commands', color=discord.Color.purple())
-                setup_help.add_field(name='**setup start**', value='Starte das setup!', inline=True)
-                setup_help.add_field(name='**setup remove**', value='Lösche alles von setup!', inline=True)
-                setup_help.set_footer(text=ctx.message.author, icon_url=f'{ctx.author.avatar_url_as(size=512)}')
+                setup_help = discord.Embed(
+                    title='**Setup Help**', description='Setup Commands', color=discord.Color.purple())
+                setup_help.add_field(name='**setup start**',
+                                     value='Starte das setup!', inline=True)
+                setup_help.add_field(
+                    name='**setup remove**', value='Lösche alles von setup!', inline=True)
+                setup_help.set_footer(
+                    text=ctx.message.author, icon_url=f'{ctx.author.avatar_url_as(size=512)}')
                 await ctx.send(embed=setup_help)
             elif args == 'START'.lower():
                 await ctx.message.delete()
@@ -46,7 +51,8 @@ class setupCommand(commands.Cog):
             elif args == 'REMOVE'.lower():
                 await ctx.message.delete()
                 role = discord.utils.get(ctx.guild.roles, name='Mute')
-                log = discord.utils.get(ctx.guild.text_channels, name='xan-log')
+                log = discord.utils.get(
+                    ctx.guild.text_channels, name='xan-log')
                 category = discord.utils.get(ctx.guild.categories, name='Xan')
                 if role:
                     await role.delete()
@@ -67,11 +73,14 @@ class setupCommand(commands.Cog):
                     await ctx.send('**Category gibt es nicht!**')
         else:
             await ctx.message.delete()
-            no_permission = discord.Embed(title='**No Permission**', color=discord.Color.dark_red())
+            no_permission = discord.Embed(
+                title='**No Permission**', color=discord.Color.dark_red())
             no_permission.add_field(name='Keine Rechte',
                                     value='```administrator```')
-            no_permission.set_footer(text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
+            no_permission.set_footer(
+                text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
             await ctx.send(embed=no_permission)
+
 
 def setup(client):
     client.add_cog(setupCommand(client))

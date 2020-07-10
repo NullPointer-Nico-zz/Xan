@@ -3,6 +3,7 @@ import json
 
 from discord.ext import commands
 
+
 class GuildJoinEvent(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -16,6 +17,7 @@ class GuildJoinEvent(commands.Cog):
 
         with open('prefixes.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
+
 
 def setup(client):
     client.add_cog(GuildJoinEvent(client))

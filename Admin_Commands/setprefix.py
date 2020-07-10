@@ -3,6 +3,7 @@ import json
 
 from discord.ext import commands
 
+
 class SetPrefix(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -26,11 +27,14 @@ class SetPrefix(commands.Cog):
                 await ctx.send(f'**Prefix wurde zu** ```{prefix}``` **geändert!**')
         else:
             await ctx.message.delete()
-            no_permission = discord.Embed(title='**No Permission**', color=discord.Color.dark_red())
+            no_permission = discord.Embed(
+                title='**No Permission**', color=discord.Color.dark_red())
             no_permission.add_field(name='Keine Rechte',
                                     value='```administrator```')
-            no_permission.set_footer(text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
+            no_permission.set_footer(
+                text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
             await ctx.send(embed=no_permission)
+
 
 def setup(client):
     client.add_cog(SetPrefix(client))
