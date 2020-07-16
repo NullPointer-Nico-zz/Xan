@@ -9,9 +9,12 @@ class memberLeaveEvent(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         leave = discord.utils.get(self.client.get_all_channels(
-        ), guild__name='➤ Xan Bot | Support', name='×📍eingangshalle📍×')
+        ), guild__name='➤ Xan Bot | Support', name='⭐eingangshalle⭐')
 
-        await leave.send(f'User _**{member.name}**_ hat unseren Discord Verlassen!')
+        if member.bot:
+            await leave.send(f'Bot _**{member.name}**_ hat unseren Discord Verlassen!')
+        else:
+            await leave.send(f'User _**{member.name}**_ hat unseren Discord Verlassen!')
 
 
 def setup(client):

@@ -3,10 +3,11 @@ import asyncio
 import datetime as d
 import os
 import json
+import sqlite3
 
 from discord.ext import commands
-from Secrets import BOT_TOKEN
 from Secrets import BOT_VERSION
+from Secrets import BOT_TOKEN
 
 
 def prefix(client, message):
