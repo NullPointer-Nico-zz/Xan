@@ -125,6 +125,7 @@ class HelpCommand(commands.Cog):
             name='**Help**', value='_usage: help <category>_', inline=False)
         help_command_for_all.add_field(
             name='**Ping**', value='_usage: ping_', inline=False)
+        help_command_for_all.add_field(name='**Feedback**', value='_usage: feedback <nachricht> | fd <nachricht>_')
         help_command_for_all.set_footer(text='<> = Nötig | [] = Nicht Nötig')
 
         await ctx.message.delete()

@@ -61,20 +61,17 @@ class Log(commands.Cog):
         if channel_id is None:
             return
         else:
-            async for entry in message.guild.audit_logs(limit=1, action=discord.AuditLogAction.message_delete):
-
-                if len(message.content) > 1024:
-                    await log.send(message.content)
-                else:
-                    embed = discord.Embed(title='**Message Deletet**',
+            if len(message.content) > 1024:
+                await log.send(message.content)
+            else:
+                embed = discord.Embed(title='**Message Deletet**',
                                       description=f'Author: {message.author.name}',
                                       color=discord.Color.red())
-                    embed.add_field(name='Content',
-                                    value=f'_{message.content}_',
-                                    inline=False)
-                    embed.add_field(name='Gelöscht von', value='_{0.user}_'.format(entry), inline=False)
-                    embed.timestamp = datetime.datetime.utcnow()  
-                    await log.send(embed=embed)
+                embed.add_field(name='Content',
+                                value=f'_{message.content}_',
+                                inline=False)
+                embed.timestamp = datetime.datetime.utcnow()  
+                await log.send(embed=embed)
 
 
     @commands.Cog.listener()
@@ -120,20 +117,6 @@ class Log(commands.Cog):
                     name='After', value=f'{after.display_name}', inline=False)
                 embed.timestamp = datetime.datetime.utcnow()
                 await log.send(embed=embed)
-
-
-    @commands.Cog.listener()
-    async def on_member_ban(self, guild, user):
-        db = sqlite3.connect('DatenBank.sqlite')
-        cursor = db.cursor()
-        cursor.execute(f'SELECT channel_id FROM Logs WHERE guild_id = {guild.id}')
-        channel_id = cursor.fetchone()
-
-        if channel_id is None:
-            return
-        else:
-            log = guild.get_channel(int(channel_id[0]))
-            
 
 
 def setup(client):

@@ -4,3 +4,5 @@ Secrets.py
 .idea
 jerbyy.py
 venv
+LiveCounterEvent.py
+DatenBank.sqlite
