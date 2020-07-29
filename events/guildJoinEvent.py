@@ -1,5 +1,5 @@
 import discord
-import json
+import sqlite3
 
 from discord.ext import commands
 
@@ -10,13 +10,18 @@ class GuildJoinEvent(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
-        with open('prefixes.json', 'r') as f:
-            prefixes = json.load(f)
+        datenbank = sqlite3.connect('DatenBank.sqlite')
+        cursor = datenbank.cursor()
+        cursor.execute(
+            f'SELECT prefix FROM Prefixe WHERE guild_id = {guild.id}')
+        result = cursor.fetchone()
 
-        prefixes[str(guild.id)] = '$'
-
-        with open('prefixes.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
+        if result is None:
+            prefix = cursor.execute('INSERT INTO Prefixe (guild_id, prefix) VALUES (?, ?)', (guild.id,"$"))
+        
+        datenbank.commit()
+        cursor.close()
+        datenbank.close()
 
 
 def setup(client):

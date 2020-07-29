@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import sqlite3
 
 from discord.ext import commands
 import commandcounter
@@ -11,6 +12,7 @@ class HelpCommand(commands.Cog):
 
     @commands.group(invoke_without_command=True, case_insensitive=True)
     async def help(self, ctx):
+
         # help commands categorys
         help_commands_category = discord.Embed(
             title='**Help**', description=f'Settings | Help', color=discord.Color.dark_blue())
@@ -47,9 +49,11 @@ class HelpCommand(commands.Cog):
         help_commands_fun.set_thumbnail(
             url='https://i.ibb.co/5Bt2bM9/Neon-Photo-Editor-20200706-144711323.jpg')
         help_commands_fun.add_field(
-            name='**Cat**', value='_usage: cat_', inline=False)
+            name='**Cat**', value=f'_usage: cat_', inline=False)
         help_commands_fun.add_field(
             name='**Dog**', value='_usage: dog_', inline=False)
+        help_commands_fun.add_field(
+            name='**Schere Stein Papier**', value='_usage: ssp <schere/stein/papier>_', inline=False)
         help_commands_fun.set_footer(text='<> = Nötig | [] = Nicht Nötig')
 
         await ctx.message.delete()
@@ -94,6 +98,9 @@ class HelpCommand(commands.Cog):
             name='**Setprefix**', value='_usage: setprefix <prefix>_', inline=False)
         help_commands_all.add_field(
             name='**Userinfo**', value='_usage: userinfo <member>_', inline=False)
+        help_commands_all.add_field(name='**Welcome Settigns**', value='_usage: welcome help_', inline=False)
+        help_commands_all.add_field(name='**Log**', value='_usage: setlog <channel>_', inline=False)
+        help_commands_all.add_field(name='**Leave Settigns**', value='_usage: leave help_', inline=False)
         help_commands_all.add_field(
             name='**Stop**', value='_usage: stop_', inline=False)
         help_commands_all.add_field(
@@ -166,6 +173,9 @@ class HelpCommand(commands.Cog):
             name='**Setprefix**', value='_usage: setprefix <prefix>_', inline=False)
         adminstrator.add_field(
             name='**Userinfo**', value='_usage: userinfo <member>_', inline=False)
+        adminstrator.add_field(name='**Welcome Settigns**', value='_usage: welcome help_', inline=False)
+        adminstrator.add_field(name='**Log**#', value='_usage: setlog <channel>_', inline=False)
+        adminstrator.add_field(name='**Leave Settigns**', value='_usage: leave help_', inline=False)
         adminstrator.set_footer(text='<> = Nötig | [] = Nicht Nötig')
 
         await ctx.message.delete()

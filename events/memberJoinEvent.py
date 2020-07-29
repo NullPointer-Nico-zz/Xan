@@ -11,7 +11,7 @@ class MemberJoinEvent(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        datenbank = sqlite3.connect('Welcomes.sqlite')
+        datenbank = sqlite3.connect('DatenBank.sqlite')
         cursor = datenbank.cursor()
         cursor.execute(
             f'SELECT channel_id FROM Welcomes WHERE guild_id = {member.guild.id}')
@@ -37,11 +37,11 @@ class MemberJoinEvent(commands.Cog):
         cursor.execute(
             f'SELECT role FROM Welcomes WHERE guild_id = {member.guild.id}')
         role = cursor.fetchone()
-        r = discord.utils.get(member.guild.roles, name=f'{role}')
 
-        if r is None:
+        if role is None:
             return
         else:
+            r = member.guild.get_role(int(role[0]))
             await member.add_roles(r)
 
     @commands.group(invoke_without_command=True, case_insensitive=True)
@@ -73,6 +73,8 @@ class MemberJoinEvent(commands.Cog):
                             value='```welcome setchannel <channel>```')
             embed.add_field(name='setmessage',
                             value='```welcome setmessage <message>```')
+            embed.add_field(
+                name='setrole', value='```welcome setrole <role>```')
             embed.set_footer(
                 text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
             await ctx.send(embed=embed)
@@ -89,7 +91,7 @@ class MemberJoinEvent(commands.Cog):
     @welcome.command()
     async def setchannel(self, ctx, channel: discord.TextChannel = None):
         if ctx.message.author.guild_permissions.administrator:
-            datenbank = sqlite3.connect('Welcomes.sqlite')
+            datenbank = sqlite3.connect('DatenBank.sqlite')
             cursor = datenbank.cursor()
             cursor.execute(
                 f'SELECT channel_id FROM Welcomes WHERE guild_id = {ctx.guild.id}')
@@ -129,7 +131,7 @@ class MemberJoinEvent(commands.Cog):
     @welcome.command()
     async def setmessage(self, ctx, *, text=None):
         if ctx.message.author.guild_permissions.administrator:
-            datenbank = sqlite3.connect('Welcomes.sqlite')
+            datenbank = sqlite3.connect('DatenBank.sqlite')
             cursor = datenbank.cursor()
             cursor.execute(
                 f'SELECT message FROM Welcomes WHERE guild_id = {ctx.guild.id}')
@@ -171,7 +173,7 @@ class MemberJoinEvent(commands.Cog):
     @welcome.command()
     async def setrole(self, ctx, role: discord.Role = None):
         if ctx.message.author.guild_permissions.administrator:
-            datenbank = sqlite3.connect('Welcomes.sqlite')
+            datenbank = sqlite3.connect('DatenBank.sqlite')
             cursor = datenbank.cursor()
             cursor.execute(
                 f'SELECT role FROM Welcomes WHERE guild_id = {ctx.guild.id}')
@@ -179,7 +181,7 @@ class MemberJoinEvent(commands.Cog):
 
             if result is None:
                 db = ('INSERT INTO Welcomes(guild_id, role) VALUES(?, ?)')
-                value = (ctx.guild.id, role.name)
+                value = (ctx.guild.id, role.id)
                 embed = discord.Embed(
                     title='**Welcome Settings**', description=f'Die Welcomes Role wurde auf **{role.mention}** gesetzt!', color=discord.Color.dark_red())
                 embed.set_footer(
@@ -188,7 +190,7 @@ class MemberJoinEvent(commands.Cog):
                 await ctx.send(embed=embed)
             elif result is not None:
                 db = ('UPDATE Welcomes SET role = ? WHERE guild_id = ?')
-                value = (role.name, ctx.guild.id)
+                value = (role.id, ctx.guild.id)
                 embed = discord.Embed(
                     title='**Welcome Settings**', description=f'Die Welcomes Role wurde auf **{role.mention}** geupdatet!', color=discord.Color.dark_red())
                 embed.set_footer(

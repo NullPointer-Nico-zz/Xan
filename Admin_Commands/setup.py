@@ -39,13 +39,6 @@ class setupCommand(commands.Cog):
                             for channles in ctx.guild.channels:
                                 await channles.set_permissions(mute_role, send_messages=False)
                             await ctx.send('**Mute Role erstellt!**')
-
-                            for log in ctx.guild.channels:
-                                if log.name == 'xan-log':
-                                    await channles.set_permissions(discord.Role.is_default, read_messages=False)
-                                    await channles.set_permissions(ctx.guild.owner, read_messages=True)
-                                    await channles.set_permissions(ctx.guild.owner, send_messages=True)
-                                    await log.send('**Log wird bald verfügbar sein!**')
                 else:
                     await ctx.send('**Setup wurde schonma ausgeführt!**')
             elif args == 'REMOVE'.lower():
@@ -59,12 +52,6 @@ class setupCommand(commands.Cog):
                     await ctx.send('**Mute Role wurde entfernt!**')
                 else:
                     await ctx.send('**Mute Role gibt es nicht!**')
-
-                if log:
-                    await log.delete()
-                    await ctx.send('**Log wurde entfernt!**')
-                else:
-                    await ctx.send('**Log gibt es nicht!**')
 
                 if category:
                     await category.delete()

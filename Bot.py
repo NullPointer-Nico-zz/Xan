@@ -11,11 +11,15 @@ from Secrets import BOT_TOKEN
 
 
 def prefix(client, message):
-    with open('prefixes.json', 'r') as f:
-        prefixes = json.load(f)
+    datenbank = sqlite3.connect('DatenBank.sqlite')
+    cursor = datenbank.cursor()
+    cursor.execute(f'SELECT prefix FROM Prefixe WHERE guild_id = {message.guild.id}')
+    result = cursor.fetchone()
 
-    return prefixes[str(message.guild.id)]
-
+    if result is None:
+        return
+    else:
+        return result
 
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 client.remove_command('help')
@@ -38,7 +42,7 @@ start_time = d.datetime.utcnow()
 async def Activity_Task():
     while True:
         for server in client.guilds:
-            s.add(server)
+            s.add(server.id)
 
         await asyncio.sleep(2)
         await client.change_presence(activity=discord.Streaming(name=f'Auf {str(len(s))} Servern!', url='https://www.twitch.tv/#'))
@@ -46,7 +50,7 @@ async def Activity_Task():
 
         for guild in client.guilds:
             for member in guild.members:
-                members.add(member)
+                members.add(member.id)
 
         await asyncio.sleep(2)
         await client.change_presence(activity=discord.Streaming(name=f'Mit {str(len(members))} Usern!', url='https://www.twitch.tv/#'))

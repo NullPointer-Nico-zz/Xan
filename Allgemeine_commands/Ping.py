@@ -14,7 +14,7 @@ class PingCommand(commands.Cog):
         p.set_thumbnail(
             url='https://i.ibb.co/5Bt2bM9/Neon-Photo-Editor-20200706-144711323.jpg')
         p.add_field(name='**Mein Ping**',
-                    value=f'**{self.client.latency}** ms!',
+                    value=f'**{self.client.latency * 1000}** ms!',
                     inline=False)
         p.set_footer(text=ctx.author.name)
         await ctx.send(embed=p)

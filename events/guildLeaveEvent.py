@@ -1,5 +1,5 @@
 import discord
-import json
+import sqlite3
 
 from discord.ext import commands
 
@@ -10,13 +10,14 @@ class GuildLeaveEvent(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
-        with open('prefixes.json', 'r') as f:
-            prefixes = json.load(f)
+        datenbank = sqlite3.connect('DatenBank.sqlite')
+        cursor = datenbank.cursor()
+        
+        cursor.execute(f'DELETE FROM Prefixe WHERE guild_id = {guild.id}')
 
-        prefixes.pop(str(guild.id))
-
-        with open('prefixes.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
+        datenbank.commit()
+        cursor.close()
+        datenbank.close()
 
 
 def setup(client):

@@ -1,5 +1,5 @@
 import discord
-import json
+import sqlite3
 
 from discord.ext import commands
 
@@ -9,22 +9,33 @@ class SetPrefix(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def setprefix(self, ctx, prefix=None):
+    async def setprefix(self, ctx, p=None):
         if ctx.message.author.guild_permissions.administrator:
-            if not prefix:
+            if not p:
                 await ctx.message.delete()
                 await ctx.send('**Bitte geb ein neuen Prefix an!**')
             else:
                 await ctx.message.delete()
-                with open('prefixes.json', 'r') as f:
-                    prefixes = json.load(f)
+                db = sqlite3.connect('DatenBank.sqlite')
+                cursor = db.cursor()
+                cursor.execute(
+                    f'SELECT prefix FROM Prefixe WHERE guild_id = {ctx.guild.id}')
+                result = cursor.fetchone()
 
-                prefixes[str(ctx.guild.id)] = prefix
+                if result is None:
+                    prefix = (
+                        'INSERT INTO Prefixe(guild_id, prefix) VALUES(?, ?)')
+                    value = (ctx.guild.id, p)
+                else:
+                    prefix = (
+                        'UPDATE Prefixe SET prefix = ? WHERE guild_id = ?')
+                    value = (p, ctx.guild.id)
 
-                with open('prefixes.json', 'w') as f:
-                    json.dump(prefixes, f, indent=4)
-
-                await ctx.send(f'**Prefix wurde zu** ```{prefix}``` **geändert!**')
+                cursor.execute(prefix, value)
+                db.commit()
+                cursor.close()
+                db.close()
+                await ctx.send(f'**Prefix wurde zu** ```{p}``` **geändert!**')
         else:
             await ctx.message.delete()
             no_permission = discord.Embed(

@@ -8,7 +8,7 @@ class StopCommand(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx):
-        if ctx.message.author.id == 346952827970781185:
+        if ctx.message.author.id == 346952827970781185 or ctx.message.author.id == 544541234937462795:
             await ctx.message.delete()
             await ctx.send('**Bot wird gestoppt!**')
             await self.client.close()
