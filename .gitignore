@@ -1,3 +1,6 @@
 __pycache__
 .vscode
 Secrets.py
+.idea
+jerbyy.py
+venv
