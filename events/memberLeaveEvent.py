@@ -14,7 +14,7 @@ class memberLeaveEvent(commands.Cog):
         datenbank = sqlite3.connect('DatenBank.sqlite')
         cursor = datenbank.cursor()
         cursor.execute(
-            f'SELECT channel_id FROM Leave WHERE guild_id = {member.guild.id}')
+            f'SELECT channel_id FROM Leaves WHERE guild_id = {member.guild.id}')
         result = cursor.fetchone()
         members = len(list(member.guild.members))
         guild = member.guild
