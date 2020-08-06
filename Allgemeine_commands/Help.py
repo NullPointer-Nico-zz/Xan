@@ -122,13 +122,14 @@ class HelpCommand(commands.Cog):
         await msg.add_reaction('▶️')
         await msg.add_reaction('⏩')
 
+        await ctx.message.delete()
+
         # Check für Reaction
         def check(reaction, user):
             return user == ctx.author and str(reaction.emoji) in ["⏪", "◀️", "▶️", "⏩"]
 
         while True:
             try:
-                await ctx.message.delete()
                 reaction, user = await self.client.wait_for('reaction_add', timeout=120, check=check)
 
                 if str(reaction.emoji) == '▶️' and cur_page != pages:
