@@ -19,7 +19,7 @@ class HelpCommand(commands.Cog):
         cur_page = 1
 
         # Haupt Embed
-        h = discord.Embed(title='**Help**', description=f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!', color=discord.Color.dark_blue())
+        h = discord.Embed(title='**Help**', description=f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!', color=discord.Color.dark_blue())
         h.set_thumbnail(url='https://i.ibb.co/5Bt2bM9/Neon-Photo-Editor-20200706-144711323.jpg')
 
         # Fun Commands
@@ -141,7 +141,7 @@ class HelpCommand(commands.Cog):
                     help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                     adminstrator.description = f'Page **{cur_page}/{pages}**'
                     owner.description = f'Page **{cur_page}/{pages}**'
-                    h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                    h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                     await msg.edit(embed=Content[cur_page-1])
                     await msg.remove_reaction(reaction, user)
@@ -155,7 +155,7 @@ class HelpCommand(commands.Cog):
                     help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                     adminstrator.description = f'Page **{cur_page}/{pages}**'
                     owner.description = f'Page **{cur_page}/{pages}**'
-                    h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                    h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                     await msg.edit(embed=Content[cur_page-1])
                     await msg.remove_reaction(reaction, user)
@@ -173,7 +173,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -187,7 +187,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -201,7 +201,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -215,7 +215,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -229,7 +229,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -249,7 +249,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -263,7 +263,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -277,7 +277,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -291,7 +291,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)
@@ -305,7 +305,7 @@ class HelpCommand(commands.Cog):
                         help_commands_fun.description = f'Page **{cur_page}/{pages}**'
                         adminstrator.description = f'Page **{cur_page}/{pages}**'
                         owner.description = f'Page **{cur_page}/{pages}**'
-                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für dich!'
+                        h.description = f'Page **{cur_page}/{pages}**\n⏪ Geh zur ersten Seite\n◀️ Gehe ein Seite zurück\n▶️ Gehe zur nächsten Seite\n⏩ Gehe zur letzen Seite\n\nDieser Help Command gilt nur für {ctx.author.mention}!'
 
                         await msg.edit(embed=Content[cur_page-1])
                         await msg.remove_reaction(reaction, user)

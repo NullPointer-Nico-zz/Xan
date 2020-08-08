@@ -8,7 +8,7 @@ class unicode(commands.Cog):
 
     @commands.command()
     async def unicode(self, ctx, *, text=''):
-        if ctx.message.author.id == 346952827970781185 or ctx.message.author.id == 544541234937462795:
+        if ctx.message.author.id == 346952827970781185:
             await ctx.send(f'```{text}```')
         else:
             no_permission = discord.Embed(

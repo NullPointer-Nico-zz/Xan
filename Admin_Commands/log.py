@@ -56,11 +56,11 @@ class Log(commands.Cog):
         cursor.execute(
             f'SELECT channel_id FROM Logs WHERE guild_id = {message.guild.id}')
         channel_id = cursor.fetchone()
-        log = message.guild.get_channel(int(channel_id[0]))
-
+        
         if channel_id is None:
             return
         else:
+            log = message.guild.get_channel(int(channel_id[0]))
             if len(message.content) > 1024:
                 await log.send(message.content)
             else:

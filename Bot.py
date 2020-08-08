@@ -5,6 +5,7 @@ import os
 import json
 import sqlite3
 
+from events.LiveCounterEvent import user
 from discord.ext import commands
 from Secrets import BOT_VERSION
 from Secrets import BOT_TOKEN
@@ -27,7 +28,6 @@ client.remove_command('help')
 s = set([])
 members = set([])
 
-
 @client.event
 async def on_ready():
     print('<====Xan====>')
@@ -35,6 +35,14 @@ async def on_ready():
     print(f'ID: {client.user.id}')
     print('<====Xan====>')
     await Activity_Task()
+
+    guild = self.client.get_guild(720694345178808332)
+
+    user.add(member.id)
+
+    for channel in guild.voice_channels:
+        if channel.id == 731263442077351981:
+            await channel.edit(name=f"» User: {len(user)} «")
 
 start_time = d.datetime.utcnow()
 
