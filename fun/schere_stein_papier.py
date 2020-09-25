@@ -1,5 +1,6 @@
 import discord
 import random
+import asyncio
 import datetime
 
 
@@ -11,99 +12,123 @@ class Game(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def ssp(self, ctx, args=None):
+    async def ssp(self, ctx):
 
-        computer = ["schere", "stein", "papier"]
         spieler =["schere",  "stein", "papier"]
 
-        help = discord.Embed(title='**Schere Stein Papier**',
+        help = discord.Embed(title='Wähle weise xD', description='Du hast 2 minuten zeit.',
                              color=discord.Color.dark_blue())
-        help.add_field(name='**How to Play**',
-                   value='Wähle was aus\n\nBeispiel.\n```ssp stein/schere/papier```')
-        help.set_footer(text="ACHTUNG! stein/schere/papier klein schreiben! ACHTUNG!")
 
 
-        if args == None:
+        msg = await ctx.send(embed=help)
 
-            await ctx.send(embed=help)
+        com = random.choice(spieler)
 
-        if args not in spieler:
+        await msg.add_reaction("✊")
+        await msg.add_reaction("📄")
+        await msg.add_reaction("✌️")
 
-            await ctx.send(embed=help)
+        def check(reaction, user):
+        	return user == ctx.author and str(reaction.emoji) in ["✊", "📄", "✌️"]
 
-        else:
+        while True:
+        	try:
+        		reaction, user = await self.client.wait_for('reaction_add', timeout=120, check=check)
 
-            result = random.choice(computer)
+        		if str(reaction.emoji) == "✊" and com == "schere":
+        			help.title = "GAME OVER"
+        			help.description == "YOU WIN"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-            you_win = discord.Embed(title='**Game Result**',color=discord.Color.dark_gold())
-            you_win.set_author(name=ctx.message.author.name)
-            you_win.add_field(name='**You Win**', value=f'You: {args}\nXan: {result}')
-            you_win.timestamp = datetime.datetime.utcnow()
+        		elif str(reaction.emoji) == "📄" and com == "schere":
+        			help.title = "GAME OVER"
+        			help.description == "YOU LOSE"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-            you_lose = discord.Embed(title='**Game Result**',color=discord.Color.dark_gold())
-            you_lose.set_author(name=ctx.message.author.name)
-            you_lose.add_field(name='**You Lose**', value=f'You: {args}\nXan: {result}')
-            you_lose.timestamp = datetime.datetime.utcnow()
+        		elif str(reaction.emoji) == "✌️" and com == "schere":
+        			help.title = "GAME OVER"
+        			help.description = "UNENDSCHIEDEN"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-            unendschieden = discord.Embed(title='**Game Result**',color=discord.Color.dark_gold())
-            unendschieden.set_author(name=ctx.message.author.name)
-            unendschieden.add_field(name='**Unentschieden**', value=f'You: {args}\nXan: {result}')
-            unendschieden.timestamp = datetime.datetime.utcnow()
+        		elif str(reaction.emoji) == "✊" and com == "papier":
+        			help.title = "GAME OVER"
+        			help.description = "YOU LOSE"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-            if args == "schere" and result == "stein":
-                
-                #you lose    
-                await ctx.send(embed=you_lose)
-                return True
+        		elif str(reaction.emoji) == "📄" and com == "papier":
+        			help.title == "GAME OVER"
+        			help.description = "UNENDSCHIEDEN"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-            elif args == "schere" and result == "schere":
+        		elif str(reaction.emoji) == "✌️" and com == "papier":
+        			help.title = "GAME OVER"
+        			help.description = "YOU WIN"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
+ 
+        		elif str(reaction.emoji) == "✊" and com == "stein":
+        			help.title = "GAME OVER"
+        			help.description = "UNENDSCHIEDEN"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-                #unendschieden
-                await ctx.send(embed=unendschieden)
-                return True
+        		elif str(reaction.emoji) == "📄" and com == "stein":
+        			help.title = "GAME OVER"
+        			help.description = "YOU WIN"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-            elif args == "schere" and result == "papier":
+        		elif str(reaction.emoji) == "✌️" and com == "stein":
+        			help.title = "GAME OVER"
+        			help.description = "YOU LOSE"
+        			await msg.edit(embed=help)
+        			await msg.remove_reaction(reaction, user)
+        			await msg.clear_reaction("✊")
+        			await msg.clear_reaction("📄")
+        			await msg.clear_reaction("✌️")
+        			break
 
-                #you win
-                await ctx.send(embed=you_win)
-                return True
-
-            elif args == "stein" and result == "papier":
-
-                #you lose
-                await ctx.send(embed=you_lose)
-                return True
-
-            elif args == "stein" and result == "schere":
-
-                #you win
-                await ctx.send(embed=you_win)
-                return True
-
-            elif args == "stein" and result == "stein":
-
-                #unendschieden
-                await ctx.send(embed=unendschieden)
-                return True
-
-            elif args == "papier" and result == "papier":
-
-                #unendschieden
-                await ctx.send(embed=unendschieden)
-                return True
-
-            elif args == "papier" and result == "schere":
-
-                #you lose
-                await ctx.send(embed=you_lose)
-                return True
-
-            elif args == "papier" and result == "stein":
-
-                #you win
-                await ctx.send(embed=you_win)
-                return True
-
+        	except asyncio.TimeoutError:
+        		help.title = "GAME OVER"
+        		help.description = "YOU LOSE"
+        		await msg.edit(embed=help) 
 
 def setup(client):
     client.add_cog(Game(client))

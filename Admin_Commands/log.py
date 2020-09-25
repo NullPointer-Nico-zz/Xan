@@ -3,7 +3,7 @@ import datetime
 import sqlite3
 
 from discord.ext import commands
-
+from Bot import trans
 
 class Log(commands.Cog):
     def __init__(self, client):
@@ -61,17 +61,20 @@ class Log(commands.Cog):
             return
         else:
             log = message.guild.get_channel(int(channel_id[0]))
-            if len(message.content) > 1024:
-                await log.send(message.content)
+            if log is None:
+                return
             else:
-                embed = discord.Embed(title='**Message Deletet**',
-                                      description=f'Author: {message.author.name}',
-                                      color=discord.Color.red())
-                embed.add_field(name='Content',
-                                value=f'_{message.content}_',
-                                inline=False)
-                embed.timestamp = datetime.datetime.utcnow()  
-                await log.send(embed=embed)
+                if len(message.content) > 1024:
+                    await log.send(message.content)
+                else:
+                    embed = discord.Embed(title='**Message Deletet**',
+                                        description=f'Author: {message.author.name}',
+                                        color=discord.Color.red())
+                    embed.add_field(name='Content',
+                                    value=f'_{message.content}_',
+                                    inline=False)
+                    embed.timestamp = datetime.datetime.utcnow()  
+                    await log.send(embed=embed)
 
 
     @commands.Cog.listener()

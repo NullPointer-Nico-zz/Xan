@@ -16,6 +16,10 @@ class GuildLeaveEvent(commands.Cog):
         cursor.execute(f'DELETE FROM Prefixe WHERE guild_id = {guild.id}')
 
         datenbank.commit()
+
+        cursor.execute(f'DELETE FROM lang WHERE guild_id = {guild.id}')
+
+        datenbank.commit()
         cursor.close()
         datenbank.close()
 

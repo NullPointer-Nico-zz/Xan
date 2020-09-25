@@ -3,7 +3,6 @@ import asyncio
 import sqlite3
 
 from discord.ext import commands
-import commandcounter
 
 class HelpCommand(commands.Cog):
     def __init__(self, client):

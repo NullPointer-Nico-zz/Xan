@@ -14,6 +14,23 @@ class BotInfoCommand(commands.Cog):
 
     @commands.command()
     async def botinfo(self, ctx):
+        def servercounter():
+            guilds = set([])
+
+            for guild in self.client.guilds:
+                guilds.add(guild.id)
+
+            return len(guilds)
+
+        def usercounter():
+            user = set([])
+
+            for guild in self.client.guilds:
+                for member in guild.members:
+                    user.add(member.id)
+
+            return len(user)
+
         # ramusage, cpuusage, usw.
         ram = psutil.virtual_memory()
         cpu = psutil.cpu_percent(interval=1)
@@ -57,6 +74,8 @@ class BotInfoCommand(commands.Cog):
                            value=f'{str(ram[2])}%', inline=True)
         bot_info.add_field(name='**CPU Usage in %**',
                            value=f'{str(cpu)}%', inline=True)
+        bot_info.add_field(name='**Server Count**', value=str(servercounter()), inline=True)
+        bot_info.add_field(name='**Member Count**', value=str(usercounter()), inline=True)
         bot_info.set_footer(
             text=ctx.author, icon_url=ctx.author.avatar_url_as(size=512))
         await ctx.send(embed=bot_info)

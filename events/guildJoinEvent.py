@@ -17,8 +17,17 @@ class GuildJoinEvent(commands.Cog):
         result = cursor.fetchone()
 
         if result is None:
-            prefix = cursor.execute('INSERT INTO Prefixe (guild_id, prefix) VALUES (?, ?)', (guild.id,"$"))
+            prefix = cursor.execute('INSERT INTO Prefixe (guild_id, prefix) VALUES (?, ?)', (guild.id, "$"))
         
+        datenbank.commit()
+
+
+        cursor.execute(f'SELECT lang FROM lang WHERE guild_id = {guild.id}')
+        result = cursor.fetchone()
+
+        if result is None:
+            lang = cursor.execute('INSERT INTO lang(guild_id, lang) VALUES(?, ?)', (guild.id, "en"))
+
         datenbank.commit()
         cursor.close()
         datenbank.close()
